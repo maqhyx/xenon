@@ -2,9 +2,8 @@ from npyscreen import *
 import npyscreen
 import sys
 import os
-import curses
-import re
-from colorama import Fore, Back
+
+
 
 
 npyscreen.disableColor()
@@ -25,7 +24,7 @@ class Xenon(NPSApp):
         self.menu = F.add_menu(name="Menu")
         self.menu.addItem("Exit Program", self.exit, "^E")
         self.menu.addItem("Save file", self.savefile, "^S")
-        self.menu.addItem("Save file & Exit", self.savefileandexit, "^I")
+        self.menu.addItem("Save file & Exit", self.savefileandexit, "^Q")
 
         with open(self.filepath, "r+") as fp:
             self.file_cnt = fp.read()
@@ -50,7 +49,6 @@ class Xenon(NPSApp):
 
 
 if __name__ == "__main__":
-    print(sys.argv)
     if len(sys.argv) > 1:
         file = sys.argv[1]
         if os.path.isfile(file) == True:
@@ -58,6 +56,4 @@ if __name__ == "__main__":
             App.filepath = file
             App.run()  
         else:
-            print("Xenon : Path doesn't exist")
-    else:
-        print("Xenon : Not enough arguments to open a file")
+            print("Error : Path doesn't exist")
